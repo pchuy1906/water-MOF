@@ -1,7 +1,0 @@
-
-xyz_2_POSCAR
-
-read fileXYZ: traj.xyz.100
-the number of atom: 192
-['H' 'O']
-[128  64]
