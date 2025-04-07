@@ -1,0 +1,29 @@
+variable Tini   equal 300
+variable nprint equal 5
+
+units            real
+newton           on              
+
+atom_style       charge
+atom_modify      map array
+atom_modify      sort 0 0.0
+
+read_data        data.lammps
+neighbor         1.0 bin
+neigh_modify     delay 0 every 1 check no page 100000 one 10000
+
+pair_style       chimesFF
+pair_coeff       * * ../../../1-fit/ChIMES_params.txt
+
+velocity         all create ${Tini} 12357
+fix              1 all nvt temp ${Tini} ${Tini} 100
+thermo_style     custom time step temp etotal pe ke press vol density enthalpy pxx pyy pzz lx ly lz
+thermo_modify    format float %20.15g flush yes 
+thermo           1
+dump             dump_1 all custom ${nprint} dump_xyz_vxyz id type x y z vx vy vz
+atom_modify      sort 0 0.0 
+
+restart          ${nprint} restart.a restart.b
+
+timestep         0.1
+run              500

@@ -1,0 +1,7 @@
+
+xyz_2_POSCAR
+
+read fileXYZ: traj.xyz.100
+the number of atom: 296
+['Al' 'C' 'H' 'N' 'O']
+[  8  40 136  16  96]
